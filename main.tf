@@ -1,5 +1,5 @@
 resource "aws_cloudtrail" "trail" {
-  name           = "trail${replace(title(var.namespace), " ", "")}${title(var.environment)}_${var.locale}"
+  name           = "trail_${replace(var.namespace, " ", "")}_${var.environment}_${var.locale}"
   s3_bucket_name = "${var.s3_bucket_name}"
   s3_key_prefix  = "${var.s3_key_prefix}"
 
