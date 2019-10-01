@@ -31,8 +31,9 @@ module "cloudtrail" {
   is_multi_region_trail         = false
   is_organization_trail         = false
 
-  project     = "My Site"
+  namespace     = "My Site"
   environment = "Production"
+  locale = "local"
 }
 ```
 
@@ -60,11 +61,11 @@ module "cloudtrail" {
   is enabled (default: `false`)
 - `is_organization_trail` - Specifies whether the trail is an AWS Organizations trail,
   which must be created in the organization master account (default: `false`)
-- `project` - Project name, used for tagging and naming the trail (default:
+- `namespace` - Project name, used for tagging and naming the trail (default:
   `Unknown`)
 - `environment` - Name of the environment this trail is targeting (default:
   `Unkown`)
-
+- `locale` - Either remote or local - remote implies the trail will end up in another account's bucket (security account)
 ## Outputs
 
 - `id` - The name of the trail.
