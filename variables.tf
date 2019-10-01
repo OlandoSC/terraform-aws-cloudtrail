@@ -1,6 +1,11 @@
-variable "project" {
+variable "namespace" {
   default     = "Unknown"
   description = "Project name, used for tagging and naming the Trail."
+}
+
+variable "locale" {
+    default = "local"
+    description = "local or remote logs"
 }
 
 variable "environment" {
