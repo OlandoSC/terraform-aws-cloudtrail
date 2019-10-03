@@ -65,8 +65,7 @@ data "aws_iam_policy_document" "cloudtrail_log_access" {
     sid     = "AWSCloudTrailWrite"
     actions = ["s3:PutObject"]
 
-    resources = ["${var.s3_key_prefix != "" ? format("%s/%s/*", aws_s3_bucket.trail[0].arn, var.s3_key_prefix) : format("%s/*", aws_s3_bucket.trail[0].arn)}"]
-
+    resources = ["${var.s3_key_prefix != "" ? format("%s/%s/*", aws_s3_bucket.trail[0].arn) : format("%s/*", aws_s3_bucket.trail[0].arn)}"]
     principals {
       type        = "Service"
       identifiers = ["cloudtrail.amazonaws.com"]
@@ -78,4 +77,7 @@ data "aws_iam_policy_document" "cloudtrail_log_access" {
       values   = ["bucket-owner-full-control"]
     }
   }
+}
+data "aws_arn" "trail" {
+  arn = "${aws_cloudtrail.trail.arn}"
 }
