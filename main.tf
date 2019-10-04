@@ -43,10 +43,10 @@ resource "aws_s3_bucket_policy" "trail" {
   policy = "${data.aws_iam_policy_document.cloudtrail_log_access[0].json}"
 }
 
-#
-# Access policy for CloudTrail <> S3
-# See: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-s3-bucket-policy-for-cloudtrail.html
-#
+# #
+# # Access policy for CloudTrail <> S3
+# # See: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-s3-bucket-policy-for-cloudtrail.html
+# #
 data "aws_iam_policy_document" "cloudtrail_log_access" {
   count = "${var.create_s3_bucket ? 1 : 0}"
 
@@ -65,7 +65,7 @@ data "aws_iam_policy_document" "cloudtrail_log_access" {
     sid     = "AWSCloudTrailWrite"
     actions = ["s3:PutObject"]
 
-    resources = ["${var.s3_key_prefix != "" ? format("%s/%s/*", aws_s3_bucket.trail[0].arn) : format("%s/*", aws_s3_bucket.trail[0].arn)}"]
+    resources = var.account_log_paths
     principals {
       type        = "Service"
       identifiers = ["cloudtrail.amazonaws.com"]

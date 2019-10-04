@@ -1,3 +1,8 @@
+variable "account_log_paths" {
+    type = list
+    description = "list of organization account log paths to security bucket - ie: aws_s3_bucket.arn/AWSLogs/aws_organizations_account.id/*"
+}
+
 variable "namespace" {
   default     = "Unknown"
   description = "Project name, used for tagging and naming the Trail."
